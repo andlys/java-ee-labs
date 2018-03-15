@@ -12,12 +12,10 @@ public class App {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("app-context.xml");
 		DisciplineDao dao = context.getBean("discDao", DisciplineDao.class);
-		FacultyDao fdao = context.getBean("facultyDao", FacultyDao.class);
 		DisciplineVO d = new DisciplineVO("Selenium WebDriver", 4);
 		StudentVO s = new StudentVO("Linus Torvalds", 2, "KV", "5346235", new StudentContact("5345345", "ggggg@sdf.sdf"));
 		d.addEnrolledStudent(s);
 		FacultyVO f = new FacultyVO("Informatics Faculty", "Mykola Mykolayovich Glybovets");
-		fdao.saveFaculty(f);
 		d.setFaculty(f);
 		dao.addDiscipline(d);
 		d.addEnrolledStudent(new StudentVO("Denys Melnichenko", 3, "ET", "756344", new StudentContact("1234567", "wfsdf@sdf.sdf")));
@@ -28,7 +26,12 @@ public class App {
 		d2.setFaculty(f);
 		d2.addEnrolledStudent(s);
 		d2.addEnrolledStudent(s2);
-		dao.saveDiscipline(d2);
+		d2 = dao.saveDiscipline(d2);
+		/*
+		 * when the line below is uncommented and used instead of the line above, 
+		 * an exception is thrown for some unexplainable reason
+		 * */
+		// dao.saveDiscipline(d2); 
 		System.out.println(d2);
 	}
 }

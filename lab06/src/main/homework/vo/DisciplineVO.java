@@ -31,6 +31,7 @@ public class DisciplineVO {
 	//@Column(name="faculty_id",insertable=false, updatable=false)
 	//private int facultyId;
     @ManyToOne(fetch=FetchType.LAZY,cascade={ CascadeType.ALL })    
+    @JoinColumn(name="faculty_id")
 	private FacultyVO faculty;
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch=FetchType.EAGER)
     @JoinTable(

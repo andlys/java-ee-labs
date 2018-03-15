@@ -1,11 +1,11 @@
 use lys_db;
 select * from student;
+select * from student_contact;
 select * from discipline;
 select * from faculty;
 select * from enrollment;
-select * from book;
-select * from topics;
 select * from lectures;
+delete from discipline where id > 3;
 delete from discipline where id = 2;
 select 
     e_s.id as eid,

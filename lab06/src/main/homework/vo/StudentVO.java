@@ -32,7 +32,7 @@ public class StudentVO {
 	@Temporal(TemporalType.DATE)
 	@Column
 	private Date enteredDate = new Date();
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name="student_contact_id")
 	private StudentContact studentContact;
 	public StudentVO() {

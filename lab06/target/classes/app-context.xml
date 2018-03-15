@@ -44,7 +44,6 @@
 	</bean>
 	<bean class="main.practice.LecturesWorker" id="worker" />
 	<bean class="main.homework.DisciplineDaoImpl" id="discDao" />
-	<bean class="main.homework.FacultyDaoImpl" id="facultyDao" />
 
 	<context:component-scan base-package="main" />
 	<tx:annotation-driven />
