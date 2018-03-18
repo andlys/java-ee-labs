@@ -7,6 +7,6 @@ import main.homework.vo.StudentVO;
 
 public interface StudentDao {
 	SimpleStudent getStudentById(int id);
-	boolean addStudent(StudentVO s);
+	boolean addStudent(SimpleStudent s);
 	List<SimpleStudent> getAllStudents();
 }

@@ -2,6 +2,7 @@ package main.homework;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,25 +23,24 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Cacheable(cacheName = "studentsCache")
 	public SimpleStudent getStudentById(int id) {
-		String query = "select s from SimpleStudent s where id = :id";
-		return em.createQuery(query, SimpleStudent.class)
+		return em.createNamedQuery("student.findById", SimpleStudent.class)
 				.setParameter("id", id)
 				.getSingleResult();
 	}
 
+	@CachePut("studentsCache")
 	@Override
-	public boolean addStudent(StudentVO s) {
-		String query = "insert s into simple_student (full_name, course) values (:name, :course)";
-		return 0 == em.createQuery(query)
-						.setParameter("name", s.getFio())
-						.setParameter("course", s.getFio())
+	public boolean addStudent(SimpleStudent s) {
+		String query = "insert into simple_student (full_name, course) values (?, ?)";
+		return 0 == em.createNativeQuery(query)
+						.setParameter(1, s.getFullName())
+						.setParameter(2, s.getCourse())
 						.executeUpdate();
 	}
 
 	@Override
 	public List<SimpleStudent> getAllStudents() {
-		String query = "select s from SimpleStudent s";
-		return em.createQuery(query, SimpleStudent.class)
+		return em.createNamedQuery("student.findAll", SimpleStudent.class)
 				.getResultList();
 	}
 

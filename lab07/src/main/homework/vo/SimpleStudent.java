@@ -8,12 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.googlecode.ehcache.annotations.Cacheable;
 
 @Entity
 @Table(name = "simple_student")
+@NamedQueries({
+	@NamedQuery(name="student.findAll", query="select s from SimpleStudent s"),
+	@NamedQuery(name="student.findById", query="select s from SimpleStudent s where s.id = :id")
+})
 public class SimpleStudent {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -5,6 +5,8 @@ select * from discipline;
 select * from faculty;
 select * from enrollment;
 select * from lectures;
+select * from simple_student;
+insert into simple_student (full_name, course) values ('123', 2);
 delete from discipline where id > 3;
 delete from discipline where id = 2;
 select 
